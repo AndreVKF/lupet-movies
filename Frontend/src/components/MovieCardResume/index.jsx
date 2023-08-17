@@ -16,8 +16,8 @@ export const MovieCardResume = ({ title, stars, description, tags }) => {
 
       <MovieTags>
         {tags &&
-          tags.map((tag) => {
-            return <Tag name={tag.name} key={tag.id} />
+          tags.map((tag, idx) => {
+            return <Tag name={tag} key={idx} />
           })}
       </MovieTags>
     </Container>

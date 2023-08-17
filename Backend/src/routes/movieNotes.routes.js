@@ -8,7 +8,7 @@ const movieNotesRouter = Router()
 movieNotesRouter.get("/", movieNotesController.index)
 movieNotesRouter.get("/:movie_note_id", movieNotesController.show)
 movieNotesRouter.post("/", movieNotesController.create)
-movieNotesRouter.put("/", movieNotesController.update)
+movieNotesRouter.put("/:movie_note_id", movieNotesController.update)
 movieNotesRouter.delete("/", movieNotesController.delete)
 
 module.exports = movieNotesRouter

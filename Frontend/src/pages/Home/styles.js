@@ -3,6 +3,7 @@ import styled from "styled-components"
 export const Container = styled.div`
   width: 100%;
   padding-bottom: 5.8rem;
+  position: absolute;
 `
 export const NewMovie = styled.div`
   display: flex;
@@ -12,6 +13,7 @@ export const NewMovie = styled.div`
   align-items: center;
 
   padding: 5.8rem 12.4rem;
+  margin-top: 10rem;
 
   > button {
     max-width: 20.8rem;
@@ -27,8 +29,5 @@ export const MovieCards = styled.div`
   gap: 2.4rem;
 
   padding: 0 12.4rem;
-
-  padding: 0 12.4rem;
-  max-height: 60vh;
   overflow-y: auto;
 `

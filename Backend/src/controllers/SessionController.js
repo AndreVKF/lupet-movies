@@ -11,20 +11,21 @@ class SessionController {
 
     const [user] = await knex("users")
       .where({ email: email.toLowerCase() })
-      .select("name", "email", "avatar")
+      .select("id", "name", "email", "password", "avatar")
 
     if (!user) {
-      throw new ErrorHandler("Email or password incorrect!!")
+      throw new ErrorHandler("Email e/ou password incorretos :(")
     }
 
     const passwordMatched = await compare(password, user.password)
 
     if (!passwordMatched) {
-      throw new ErrorHandler("Email or password incorrect!!")
+      throw new ErrorHandler("Email e/ou password incorretos :(")
     }
 
     const { secret, expiresIn } = jwtConfig
     const token = sign({ userId: user.id }, secret, { expiresIn })
+    delete user["password"]
 
     const date = new Date()
     const expiresDt = new Date(date.setDate(date.getDate() + 1))

@@ -31,13 +31,13 @@ class MovieNotesController {
   }
 
   async create(req, res) {
-    const { title, description, rating } = req.body
+    const { title, description, rating, tags } = req.body
     const { user_id } = req.user
 
     const [movieNoteDb] = await knex("movie_notes").where({ title, user_id })
 
     if (movieNoteDb) {
-      throw new ErrorHandler(`Movie already inserted in database!!`)
+      throw new ErrorHandler(`Filme já cadastrado na base de dados!!`)
     }
 
     const [movieNote] = await knex("movie_notes").insert(
@@ -47,41 +47,64 @@ class MovieNotesController {
         rating,
         user_id,
       },
-      ["title", "rating"]
+      ["id", "title", "rating"]
     )
+
+    if (tags && tags.length > 0) {
+      const selectedTags = await knex("tags").whereIn("tag", tags)
+      const movieTags = selectedTags.map((tag) => {
+        return { user_id, note_id: movieNote.id, tag_id: tag.id }
+      })
+
+      await knex("movie_tags").insert(movieTags)
+    }
 
     return res.json(movieNote)
   }
 
   async update(req, res) {
-    const { title, description, rating } = req.body
+    const { description, rating, tags } = req.body
+    const { movie_note_id: id } = req.params
     const { user_id } = req.user
 
-    const [movieNoteDb] = await knex("movie_notes").where({ title, user_id })
+    const [movieNoteDb] = await knex("movie_notes").where({ id, user_id })
 
     if (!movieNoteDb) {
-      throw new ErrorHandler(`Movie title ${title} not found!!`)
+      throw new ErrorHandler(`Filme de id ${id} não encontrado!!`)
     }
 
     const [updatedMovie] = await knex("movie_notes")
-      .where({ id: movieNoteDb.id })
-      .update({ description, rating }, ["title", "rating"])
+      .where({ id, user_id })
+      .update({ description, rating }, ["id", "title", "rating"])
+
+    if (tags && tags.length > 0) {
+      await knex("movie_tags").where({ note_id: id, user_id }).del()
+
+      const selectedTags = await knex("tags").whereIn("tag", tags)
+      const movieTags = selectedTags.map((tag) => {
+        return { user_id, note_id: id, tag_id: tag.id }
+      })
+
+      await knex("movie_tags").insert(movieTags)
+    }
 
     return res.json(updatedMovie)
   }
 
   async delete(req, res) {
-    const { title } = req.body
+    const { id } = req.body
     const { user_id } = req.user
 
-    const [movieNoteDb] = await knex("movie_notes").where({ title, user_id })
+    const [movieNoteDb] = await knex("movie_notes").where({ id, user_id })
 
     if (!movieNoteDb) {
-      throw new ErrorHandler(`Movie title ${title} not found!!`)
+      throw new ErrorHandler(`Filme de id ${id} não encontrado!!`)
     }
-    await knex("movie_notes").where({ id: movieNoteDb.id }).del()
+    await knex("movie_notes").where({ id, user_id }).del()
 
-    return res.json({ message: `Movie ${title} successufully deleted!!` })
+    return res.json({
+      message: `Movie note de id: ${id} deletado com sucesso!!`,
+    })
   }
 }
 

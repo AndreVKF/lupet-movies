@@ -5,7 +5,7 @@ import { api } from "../services/api"
 const AuthContext = createContext({})
 
 function AuthProvider({ children }) {
-  const [userData, setUserData] = useState({})
+  const [userData, setUserData] = useState(null)
 
   const signUp = async ({ email, password }) => {
     try {
@@ -30,18 +30,33 @@ function AuthProvider({ children }) {
     }
   }
 
+  const signOut = () => {
+    localStorage.removeItem("@lupetmovies:user")
+    localStorage.removeItem("@lupetmovies:token")
+
+    try {
+      delete api.defaults.headers.common["Authorization"]
+    } finally {
+      setUserData(null)
+    }
+  }
+
   useEffect(() => {
     const token = localStorage.getItem("@lupetmovies:token")
     const user = localStorage.getItem("@lupetmovies:user")
 
     if (token && user) {
-      api.defaults.common["Authorization"] = `Bearer ${token}`
+      api.defaults.headers.common["Authorization"] = `Bearer ${token}`
 
-      setUserData({ user: JSON.parse(user) })
+      setUserData({ ...JSON.parse(user) })
     }
   }, [])
 
-  return <AuthContext value={{ userData, signUp }}>{children}</AuthContext>
+  return (
+    <AuthContext.Provider value={{ userData, setUserData, signUp, signOut }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 function useAuth() {

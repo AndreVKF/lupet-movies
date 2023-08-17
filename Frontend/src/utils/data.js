@@ -45,4 +45,73 @@ export const MOVIE_CARDS = [
       },
     ],
   },
+  {
+    id: 3,
+    title: "Alien - O 8º Passageiro",
+    stars: 5,
+    description:
+      "The opening credits appear in front of a large planet with rings. Out in the far reaches of deep space the Nostromo, a commercial towing space vehicle, carrying a refinery with twenty million tons of mineral ore, is en route to Earth with a crew of seven. Inside, the ship appears eerily quiet, but suddenly, the on-board computer is activated. Lights inside the ship are activated, and a room with seven biobeds is illuminated. The canopies open to awaken the crew. Executive Officer Kane (John Hurt) is the first to awaken from hypersleep. They congregate in the mess hall, where they cheerfully enjoy a meal. Chief Engineer Parker (Yaphet Kotto) and Engineering Technician Brett (Harry Dean Stanton) take the opportunity to discuss the bonus system, which they find unfair, as they get paid less than the officers. Captain Dallas (Tom Skerritt) is called away by MOTHER, the ship's computer, before they can have a meaningful conversation. Dallas enters the MOTHER console room, and tries to assess the situation, as the rest of the crew gets in the cockpit of the ship to determine their location. They quickly deduce that they are nowhere near home yet. Navigator Lambert (Veronica Cartwright) finds out that they are at Zeta II Reticuli, an outlying system. When Parker and Brett return from their round of the lower deck, complaining about their colleagues' attitude and the bonus system, Dallas briefs the crew: the ship is not even halfway home, and has altered its course because it has picked up an unknown signal, which repeats every 12 seconds. The crew has been awoken from hypersleep to investigate. Parker protests, arguing that they're not a rescue team and that they should be compensated for the extra work, but Science Officer Ash (Ian Holm) stipulates that per Company contract, the crew is obliged to investigate any signal from an intelligent source; non-compliance will result in loss of pay, which quickly puts Parker in a more cooperative mood.\n\nThe crew assembles in the cockpit to listen to the signal. It sounds very strange and unearthly, perhaps like a voice. Lambert homes in on it and finds that it comes from a planetoid, 1200 km in diameter, with a two-hour rotation and some gravity.",
+    user: "Lupet Bolota",
+    publishDate: "23/05/22 às 08:00",
+    tags: [
+      {
+        id: 1,
+        name: "Ficção Científica",
+      },
+      {
+        id: 4,
+        name: "Terror",
+      },
+      {
+        id: 5,
+        name: "Suspense",
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "Alien - O 8º Passageiro",
+    stars: 5,
+    description:
+      "The opening credits appear in front of a large planet with rings. Out in the far reaches of deep space the Nostromo, a commercial towing space vehicle, carrying a refinery with twenty million tons of mineral ore, is en route to Earth with a crew of seven. Inside, the ship appears eerily quiet, but suddenly, the on-board computer is activated. Lights inside the ship are activated, and a room with seven biobeds is illuminated. The canopies open to awaken the crew. Executive Officer Kane (John Hurt) is the first to awaken from hypersleep. They congregate in the mess hall, where they cheerfully enjoy a meal. Chief Engineer Parker (Yaphet Kotto) and Engineering Technician Brett (Harry Dean Stanton) take the opportunity to discuss the bonus system, which they find unfair, as they get paid less than the officers. Captain Dallas (Tom Skerritt) is called away by MOTHER, the ship's computer, before they can have a meaningful conversation. Dallas enters the MOTHER console room, and tries to assess the situation, as the rest of the crew gets in the cockpit of the ship to determine their location. They quickly deduce that they are nowhere near home yet. Navigator Lambert (Veronica Cartwright) finds out that they are at Zeta II Reticuli, an outlying system. When Parker and Brett return from their round of the lower deck, complaining about their colleagues' attitude and the bonus system, Dallas briefs the crew: the ship is not even halfway home, and has altered its course because it has picked up an unknown signal, which repeats every 12 seconds. The crew has been awoken from hypersleep to investigate. Parker protests, arguing that they're not a rescue team and that they should be compensated for the extra work, but Science Officer Ash (Ian Holm) stipulates that per Company contract, the crew is obliged to investigate any signal from an intelligent source; non-compliance will result in loss of pay, which quickly puts Parker in a more cooperative mood.\n\nThe crew assembles in the cockpit to listen to the signal. It sounds very strange and unearthly, perhaps like a voice. Lambert homes in on it and finds that it comes from a planetoid, 1200 km in diameter, with a two-hour rotation and some gravity.",
+    user: "Lupet Bolota",
+    publishDate: "23/05/22 às 08:00",
+    tags: [
+      {
+        id: 1,
+        name: "Ficção Científica",
+      },
+      {
+        id: 4,
+        name: "Terror",
+      },
+      {
+        id: 5,
+        name: "Suspense",
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "Alien - O 8º Passageiro",
+    stars: 5,
+    description:
+      "The opening credits appear in front of a large planet with rings. Out in the far reaches of deep space the Nostromo, a commercial towing space vehicle, carrying a refinery with twenty million tons of mineral ore, is en route to Earth with a crew of seven. Inside, the ship appears eerily quiet, but suddenly, the on-board computer is activated. Lights inside the ship are activated, and a room with seven biobeds is illuminated. The canopies open to awaken the crew. Executive Officer Kane (John Hurt) is the first to awaken from hypersleep. They congregate in the mess hall, where they cheerfully enjoy a meal. Chief Engineer Parker (Yaphet Kotto) and Engineering Technician Brett (Harry Dean Stanton) take the opportunity to discuss the bonus system, which they find unfair, as they get paid less than the officers. Captain Dallas (Tom Skerritt) is called away by MOTHER, the ship's computer, before they can have a meaningful conversation. Dallas enters the MOTHER console room, and tries to assess the situation, as the rest of the crew gets in the cockpit of the ship to determine their location. They quickly deduce that they are nowhere near home yet. Navigator Lambert (Veronica Cartwright) finds out that they are at Zeta II Reticuli, an outlying system. When Parker and Brett return from their round of the lower deck, complaining about their colleagues' attitude and the bonus system, Dallas briefs the crew: the ship is not even halfway home, and has altered its course because it has picked up an unknown signal, which repeats every 12 seconds. The crew has been awoken from hypersleep to investigate. Parker protests, arguing that they're not a rescue team and that they should be compensated for the extra work, but Science Officer Ash (Ian Holm) stipulates that per Company contract, the crew is obliged to investigate any signal from an intelligent source; non-compliance will result in loss of pay, which quickly puts Parker in a more cooperative mood.\n\nThe crew assembles in the cockpit to listen to the signal. It sounds very strange and unearthly, perhaps like a voice. Lambert homes in on it and finds that it comes from a planetoid, 1200 km in diameter, with a two-hour rotation and some gravity.",
+    user: "Lupet Bolota",
+    publishDate: "23/05/22 às 08:00",
+    tags: [
+      {
+        id: 1,
+        name: "Ficção Científica",
+      },
+      {
+        id: 4,
+        name: "Terror",
+      },
+      {
+        id: 5,
+        name: "Suspense",
+      },
+    ],
+  },
 ]

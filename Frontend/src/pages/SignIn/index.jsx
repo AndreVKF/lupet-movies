@@ -8,6 +8,7 @@ import { Input } from "../../components/Input"
 import { Button } from "../../components/Button"
 import { ImageBackground } from "../../components/ImageBackground"
 import { LoginHeader } from "../../components/LoginHeader"
+import { InputPassword } from "../../components/InputPassword"
 
 import { ROUTES } from "../../utils/constants"
 import { api } from "../../services/api"
@@ -19,7 +20,7 @@ export const SignIn = () => {
   const [password, setPassword] = useState("")
 
   const navigate = useNavigate()
-  const { signUp } = useAuth
+  const { signUp } = useAuth()
 
   const handleSignIn = async (e) => {
     e.preventDefault()
@@ -29,7 +30,7 @@ export const SignIn = () => {
       return
     }
 
-    const requestCreateUser = await api.post(ROUTES.CREATE_USER, {
+    const requestCreateUser = await api.post(ROUTES.USERS, {
       name,
       email,
       password,
@@ -67,10 +68,8 @@ export const SignIn = () => {
             icon={FiMail}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Input
-            type="password"
+          <InputPassword
             placeholder="Senha"
-            icon={FiLock}
             onChange={(e) => setPassword(e.target.value)}
           />
 

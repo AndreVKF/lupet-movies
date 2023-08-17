@@ -1,32 +1,33 @@
-require("dotenv").config()
 require("express-async-errors")
+const express = require("express")
+const cors = require("cors")
 const ErrHandler = require("./utils/ErrorHandler")
 
 const routes = require("./routes")
-
-const express = require("express")
 
 const app = express()
 const port = 3333
 
 // middlewares
 app.use(express.json())
+app.use(cors())
 app.use(routes)
 
 // error handler
 app.use((err, req, res, next) => {
   if (err instanceof ErrHandler) {
-    return res.status(err.statusCode).json({
-      status: "error",
+    res.status(err.statusCode).json({
       message: err.message,
     })
+
+    return
   }
 
   console.log(err)
 
-  return res.status(500).json({
+  res.status(500).json({
     status: "error",
-    message: "Internal Server Error",
+    message: "Erro Interno do Servidor",
   })
 })
 

@@ -6,7 +6,7 @@ import { AuthRoutes } from "./auth.routes"
 import { useAuth } from "../hooks/auth"
 
 export function Routes() {
-  const { userData } = useAuth
+  const { userData } = useAuth()
 
   return (
     <BrowserRouter>{userData ? <AppRoutes /> : <AuthRoutes />}</BrowserRouter>

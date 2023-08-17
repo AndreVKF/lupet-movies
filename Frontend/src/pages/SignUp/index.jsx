@@ -7,6 +7,7 @@ import { Container, FormSide } from "./styles"
 import { ImageBackground } from "../../components/ImageBackground"
 import { LoginHeader } from "../../components/LoginHeader"
 import { Input } from "../../components/Input"
+import { InputPassword } from "../../components/InputPassword"
 import { Button } from "../../components/Button"
 
 import { useAuth } from "../../hooks/auth"
@@ -16,9 +17,11 @@ export const SignUp = () => {
   const [password, setPassword] = useState("")
 
   const navigate = useNavigate()
-  const { signUp } = useAuth
+  const { signUp } = useAuth()
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (e) => {
+    e.preventDefault()
+
     await signUp({ email, password })
     navigate("/")
   }
@@ -35,10 +38,8 @@ export const SignUp = () => {
             icon={FiMail}
             onChange={(e) => setEmail(e.target.value)}
           />
-          <Input
-            type="password"
+          <InputPassword
             placeholder="Senha"
-            icon={FiLock}
             onChange={(e) => setPassword(e.target.value)}
           />
 

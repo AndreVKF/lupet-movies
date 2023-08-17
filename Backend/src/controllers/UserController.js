@@ -47,7 +47,7 @@ class UserController {
         password: hashedPassword,
         avatar,
       },
-      ["id", "name", "email"]
+      ["id", "name", "email", "avatar"]
     )
 
     return res.json(user)
@@ -55,6 +55,7 @@ class UserController {
 
   update = async (req, res) => {
     const { name, email, password, old_password, avatar } = req.body
+    const { user_id } = req.user
 
     if (!email) {
       this.missingAttributeError("email")
@@ -68,6 +69,10 @@ class UserController {
 
     if (!user) {
       this.userNotRegisteredError()
+    }
+
+    if (user.id !== user_id) {
+      this.dataMismatch()
     }
 
     const isPasswordCorrect = await this.validatePassword(
@@ -88,7 +93,7 @@ class UserController {
         password: newHashedPassword,
         avatar,
       },
-      ["id", "name", "email"]
+      ["id", "name", "email", "avatar"]
     )
 
     return res.json(updatedUser)
@@ -121,19 +126,23 @@ class UserController {
 
   // arrow functions doesn't require binding
   userNotRegisteredError = () => {
-    throw new ErrorHandler("User not registered", 400)
+    throw new ErrorHandler("Usuário não cadastrado!!", 400)
   }
 
   userAlreadyRegisteredError = () => {
-    throw new ErrorHandler("User already registered!!", 400)
+    throw new ErrorHandler("Usuário já cadastrado!!", 400)
   }
 
   wrongPasswordError = () => {
-    throw new ErrorHandler("User or password incorrect!!", 400)
+    throw new ErrorHandler("Email e/ou password incorretos :(")
+  }
+
+  dataMismatch = () => {
+    throw new ErrorHandler("Dados inconsistentes do usuário!!", 500)
   }
 
   missingAttributeError = (attributeName) => {
-    throw new ErrorHandler(`Missing obligatory attribute: ${attributeName}!!`)
+    throw new ErrorHandler(`Faltam atributos obrigatórios: ${attributeName}!!`)
   }
 
   getUserByEmail = async (email) => {

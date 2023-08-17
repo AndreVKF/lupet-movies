@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const Container = styled.header`
   grid-area: header;
+  position: fixed;
 
   width: 100%;
   height: 11.6rem;
@@ -15,12 +16,16 @@ export const Container = styled.header`
   padding: 4.2rem 12.4rem;
 
   border-bottom: 1px solid ${({ theme }) => theme.COLORS.BACKGROUND_500};
+  background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
 
-  > span {
+  z-index: 2;
+
+  > a {
     font-weight: bold;
     font-size: 2.4rem;
     color: ${({ theme }) => theme.COLORS.PINK};
     cursor: pointer;
+    text-decoration: none;
   }
 
   > input {
@@ -53,12 +58,14 @@ export const Profile = styled.div`
     align-items: right;
 
     > strong,
-    > span {
+    > span,
+    a {
       font-weight: bold;
       font-size: 1.4rem;
     }
 
-    > strong {
+    > strong,
+    a {
       color: ${({ theme }) => theme.COLORS.GRAY_300};
     }
 

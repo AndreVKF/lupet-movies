@@ -1,18 +1,35 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 
 import { Container, Profile } from "./styles"
 
-export const Header = () => {
+import { useAuth } from "../../hooks/auth"
+import { titleString } from "../../utils/functions"
+
+export const Header = ({ searchMovie = true }) => {
+  const { userData, signOut } = useAuth()
+  const navigate = useNavigate()
+
+  const handleLeavePage = (e) => {
+    e.preventDefault()
+
+    signOut()
+    navigate("/")
+  }
+
   return (
     <Container>
-      <span>LupetMovies</span>
+      <Link to="/">
+        <span>LupetMovies</span>
+      </Link>
 
-      <input type="text" placeholder="Pesquisar pelo título" />
+      {searchMovie && <input type="text" placeholder="Pesquisar pelo título" />}
 
       <Profile>
         <div>
-          <strong>Lupet Bolota</strong>
-          <span>sair</span>
+          <Link to="/perfil">
+            <strong>{titleString(userData.name)}</strong>
+          </Link>
+          <span onClick={handleLeavePage}>sair</span>
         </div>
         <Link to="/perfil">
           <img src="https://github.com/AndreVKF.png" alt="Imagem do Usuário" />
