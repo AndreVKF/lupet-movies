@@ -22,6 +22,9 @@ export const Perfil = () => {
 
   const [name, setName] = useState(titleString(userData.name))
   const [email, setEmail] = useState(userData.email)
+
+  const [avatar, setAvatar] = useState(userData.avatar)
+
   const [oldPassword, setOldPassword] = useState("")
   const [newPassword, setNewPassword] = useState("")
 
@@ -37,8 +40,14 @@ export const Perfil = () => {
         password: newPassword,
         old_password: oldPassword,
       })
-      .then((data) => {
-        setUserData(data.data)
+      .then((res) => {
+        const newUserData = {
+          ...userData,
+          ...{ name: res.data.name, email: res.data.email },
+        }
+        console.log(newUserData)
+
+        setUserData(newUserData)
         setOldPassword("")
         setNewPassword("")
         alert("Dados do usuário atualizados com sucesso!!")
@@ -53,6 +62,38 @@ export const Perfil = () => {
       })
   }
 
+  const handleChangeAvatar = (e) => {
+    e.preventDefault()
+
+    const file = e.target.files[0]
+
+    if (!file) {
+      return
+    }
+
+    const fileUploadForm = new FormData()
+    fileUploadForm.append("avatar", file)
+
+    api
+      .patch(ROUTES.USERS_AVATAR, fileUploadForm)
+      .then((res) => {
+        const { avatar: newAvatar } = res.data
+        const newUserData = { ...userData }
+        newUserData.avatar = `${api.defaults.baseURL}/files/${newAvatar}`
+
+        setUserData(newUserData)
+        setAvatar(newUserData.avatar)
+        localStorage.setItem("@lupetmovies:user", JSON.stringify(newUserData))
+      })
+      .catch((err) => {
+        if (err.response) {
+          alert(err.response.data.message)
+        } else {
+          alert("Não foi possível atualizar imagem do usuário!!")
+        }
+      })
+  }
+
   useEffect(() => {
     if (oldPassword !== "" && newPassword !== "") {
       setAllowUpdate(true)
@@ -60,6 +101,10 @@ export const Perfil = () => {
       setAllowUpdate(false)
     }
   }, [oldPassword, newPassword])
+
+  useEffect(() => {
+    console.log(userData)
+  }, [])
 
   return (
     <Container>
@@ -71,10 +116,11 @@ export const Perfil = () => {
 
       <Content>
         <Avatar>
-          <img src="https://github.com/AndreVKF.png" alt="Foto do usuário" />
-          <div>
+          <img src={avatar} alt="Foto do usuário" />
+          <label htmlFor="avatar">
             <FiCamera size={18} />
-          </div>
+            <input type="file" id="avatar" onChange={handleChangeAvatar} />
+          </label>
         </Avatar>
 
         <Form>

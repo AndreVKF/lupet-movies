@@ -46,7 +46,7 @@ export const SignUp = () => {
           <Button type="submit" text="Entrar" onClick={handleSignUp} />
         </form>
 
-        <Link to="/">Criar Conta</Link>
+        <Link to="/register">Criar Conta</Link>
       </FormSide>
       <ImageBackground />
     </Container>

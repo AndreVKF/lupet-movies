@@ -15,7 +15,6 @@ import {
 import { Header } from "../../components/Header"
 import { GoBack } from "../../components/GoBack"
 import { Input } from "../../components/Input"
-import { Markers } from "../../components/Markers"
 import { Button } from "../../components/Button"
 import { api } from "../../services/api"
 
@@ -85,9 +84,7 @@ export const CreateMovie = () => {
 
       <MainContent>
         <HeaderContent>
-          <Link to="/">
-            <GoBack />
-          </Link>
+          <GoBack />
 
           <h1>Novo filme</h1>
         </HeaderContent>

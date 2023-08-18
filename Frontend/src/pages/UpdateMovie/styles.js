@@ -6,8 +6,12 @@ export const Container = styled.div`
 `
 
 export const MainContent = styled.div`
-  padding: 4rem 12.4rem 8.5rem;
+  padding: 4rem 24rem 8.5rem;
   margin-top: 10rem;
+
+  @media only screen and (max-width: 1400px) {
+    padding: 4rem 12.4rem 8.5rem;
+  }
 `
 
 export const HeaderContent = styled.div`

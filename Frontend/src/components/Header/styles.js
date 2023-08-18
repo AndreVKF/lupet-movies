@@ -13,12 +13,16 @@ export const Container = styled.header`
   align-items: center;
   gap: 6.4rem;
 
-  padding: 4.2rem 12.4rem;
+  padding: 4.2rem 24rem;
 
   border-bottom: 1px solid ${({ theme }) => theme.COLORS.BACKGROUND_500};
   background-color: ${({ theme }) => theme.COLORS.BACKGROUND_900};
 
   z-index: 2;
+
+  @media only screen and (max-width: 1400px) {
+    padding: 5.8rem 12.4rem;
+  }
 
   > a {
     font-weight: bold;
@@ -80,5 +84,6 @@ export const Profile = styled.div`
     height: 6.4rem;
     border-radius: 50%;
     cursor: pointer;
+    object-fit: cover;
   }
 `

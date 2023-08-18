@@ -1,3 +1,4 @@
+import { useAuth } from "../../hooks/auth"
 import { BsClock } from "react-icons/bs"
 
 import { Container, MovieHeader, PublisherInfo, MovieTags } from "./styles"
@@ -8,6 +9,7 @@ import { Tag } from "../../components/Tag"
 import { adjustTagsForMovieInfo, titleString } from "../../utils/functions"
 
 export const MovieCard = ({ movie }) => {
+  const { userData } = useAuth()
   const { tags } = adjustTagsForMovieInfo(movie)
 
   return (
@@ -19,7 +21,7 @@ export const MovieCard = ({ movie }) => {
 
       <PublisherInfo>
         <img
-          src="https://github.com/AndreVKF.png"
+          src={userData.avatar}
           alt="Foto do usuário que publicou a descrição do filme"
         />
         <span>Por {titleString(movie.user_name)}</span>

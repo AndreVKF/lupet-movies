@@ -36,10 +36,10 @@ export const Avatar = styled.div`
     height: 18.6rem;
     width: 18.6rem;
     border-radius: 50%;
-    object-fit: contain;
+    object-fit: cover;
   }
 
-  > div {
+  > label {
     display: grid;
     place-content: center;
 
@@ -51,6 +51,12 @@ export const Avatar = styled.div`
     border-radius: 50%;
     background-color: ${({ theme }) => theme.COLORS.PINK};
     color: ${({ theme }) => theme.COLORS.BACKGROUND_600};
+
+    cursor: pointer;
+
+    > input {
+      display: none;
+    }
   }
 `
 

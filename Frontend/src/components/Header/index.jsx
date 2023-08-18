@@ -5,7 +5,7 @@ import { Container, Profile } from "./styles"
 import { useAuth } from "../../hooks/auth"
 import { titleString } from "../../utils/functions"
 
-export const Header = ({ searchMovie = true }) => {
+export const Header = ({ searchMovie = true, searchTitle, setSearchTitle }) => {
   const { userData, signOut } = useAuth()
   const navigate = useNavigate()
 
@@ -22,7 +22,14 @@ export const Header = ({ searchMovie = true }) => {
         <span>LupetMovies</span>
       </Link>
 
-      {searchMovie && <input type="text" placeholder="Pesquisar pelo título" />}
+      {searchMovie && (
+        <input
+          type="text"
+          placeholder="Pesquisar pelo título"
+          onChange={(e) => setSearchTitle(e.target.value)}
+          value={searchTitle}
+        />
+      )}
 
       <Profile>
         <div>
@@ -32,7 +39,7 @@ export const Header = ({ searchMovie = true }) => {
           <span onClick={handleLeavePage}>sair</span>
         </div>
         <Link to="/perfil">
-          <img src="https://github.com/AndreVKF.png" alt="Imagem do Usuário" />
+          <img src={userData.avatar} alt="Imagem do Usuário" />
         </Link>
       </Profile>
     </Container>

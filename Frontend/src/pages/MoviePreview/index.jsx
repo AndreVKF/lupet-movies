@@ -68,9 +68,7 @@ export const MoviePreview = () => {
       <Header searchMovie={false} />
 
       <Main>
-        <Link to="/">
-          <GoBack />
-        </Link>
+        <GoBack />
         {movie && <MovieCard movie={movie} />}
 
         <div>

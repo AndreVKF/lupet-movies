@@ -13,6 +13,7 @@ import { adjustTagsForMovieInfo } from "../../utils/functions"
 
 export const Home = () => {
   const [movieList, setMovieList] = useState([])
+  const [filteredMovieList, setFilteredMovieList] = useState([])
   const [searchTitle, setSearchTitle] = useState("")
 
   useEffect(() => {
@@ -24,6 +25,7 @@ export const Home = () => {
         )
 
         setMovieList(movieNotes)
+        setFilteredMovieList(movieNotes)
       })
       .catch((err) => {
         console.log(err)
@@ -35,9 +37,28 @@ export const Home = () => {
       })
   }, [])
 
+  useEffect(() => {
+    if (!searchTitle || searchTitle === "") {
+      setFilteredMovieList(movieList)
+      return
+    }
+
+    const searchMatchMovieList = movieList.filter((movie) => {
+      const title = movie.movie_title.toLowerCase()
+
+      return title.includes(searchTitle.toLowerCase())
+    })
+
+    setFilteredMovieList(searchMatchMovieList)
+  }, [searchTitle, movieList])
+
   return (
     <Container>
-      <Header />
+      <Header
+        searchMovie={true}
+        searchTitle={searchTitle}
+        setSearchTitle={setSearchTitle}
+      />
 
       <NewMovie>
         <h1>Lista de filmes</h1>
@@ -47,8 +68,8 @@ export const Home = () => {
       </NewMovie>
 
       <MovieCards>
-        {movieList &&
-          movieList.map((movieCard) => {
+        {filteredMovieList &&
+          filteredMovieList.map((movieCard) => {
             return (
               <Link
                 key={movieCard.movie_note_id}

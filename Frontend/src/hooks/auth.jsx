@@ -14,6 +14,9 @@ function AuthProvider({ children }) {
         password,
       })
       const { user, token } = response.data
+      user.avatar = user.avatar
+        ? `${api.defaults.baseURL}/files/${user.avatar}`
+        : "/images/default_avatar.png"
 
       localStorage.setItem("@lupetmovies:user", JSON.stringify(user))
       localStorage.setItem("@lupetmovies:token", token)

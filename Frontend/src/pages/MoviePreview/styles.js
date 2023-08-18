@@ -13,8 +13,12 @@ export const Main = styled.main`
   align-items: start;
   gap: 2.4rem;
 
-  padding: 4rem 12.4rem 15.6rem;
+  padding: 4rem 24rem 15.6rem;
   margin-top: 10rem;
+
+  @media only screen and (max-width: 1400px) {
+    padding: 4rem 12.4rem 15.6rem;
+  }
 
   > div {
     display: flex;

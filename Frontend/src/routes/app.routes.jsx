@@ -5,6 +5,7 @@ import { Perfil } from "../pages/Perfil"
 import { MoviePreview } from "../pages/MoviePreview"
 import { CreateMovie } from "../pages/CreateMovie"
 import { UpdateMovie } from "../pages/UpdateMovie"
+import { NotFound } from "../pages/NotFound"
 
 export function AppRoutes() {
   return (
@@ -14,6 +15,7 @@ export function AppRoutes() {
       <Route path="/preview/:movie_note_id" element={<MoviePreview />} />
       <Route path="/create" element={<CreateMovie />} />
       <Route path="/update/:movie_note_id" element={<UpdateMovie />} />
+      <Route path="*" element={<NotFound />} />
     </Routes>
   )
 }

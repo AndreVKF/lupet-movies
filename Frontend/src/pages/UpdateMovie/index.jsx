@@ -102,9 +102,7 @@ export const UpdateMovie = () => {
 
       <MainContent>
         <HeaderContent>
-          <Link to="/">
-            <GoBack />
-          </Link>
+          <GoBack />
 
           <h1>Atualizar filme</h1>
         </HeaderContent>

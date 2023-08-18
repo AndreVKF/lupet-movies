@@ -77,7 +77,7 @@ export const SignIn = () => {
         </form>
 
         <Return>
-          <Link to="/login">
+          <Link to="/">
             <span>Realizar login</span>
           </Link>
         </Return>

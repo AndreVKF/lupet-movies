@@ -12,8 +12,12 @@ export const NewMovie = styled.div`
   justify-content: space-between;
   align-items: center;
 
-  padding: 5.8rem 12.4rem;
+  padding: 5.8rem 24rem;
   margin-top: 10rem;
+
+  @media only screen and (max-width: 1400px) {
+    padding: 5.8rem 12.4rem;
+  }
 
   > button {
     max-width: 20.8rem;
@@ -28,6 +32,11 @@ export const MovieCards = styled.div`
 
   gap: 2.4rem;
 
-  padding: 0 12.4rem;
+  padding: 0 24rem;
+
+  @media only screen and (max-width: 1400px) {
+    padding: 0rem 12.4rem;
+  }
+
   overflow-y: auto;
 `
