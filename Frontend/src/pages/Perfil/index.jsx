@@ -102,10 +102,6 @@ export const Perfil = () => {
     }
   }, [oldPassword, newPassword])
 
-  useEffect(() => {
-    console.log(userData)
-  }, [])
-
   return (
     <Container>
       <Header>
