@@ -10,11 +10,14 @@ import { Button } from "../../components/Button"
 
 import { ROUTES } from "../../utils/constants"
 import { api } from "../../services/api"
+import { useAuth } from "../../hooks/auth"
 
 export const MoviePreview = () => {
+  const { userData } = useAuth()
   const navigate = useNavigate()
 
   const [movie, setMovie] = useState(null)
+  const [isUserMovie, setIsUserMovie] = useState(false)
   const { movie_note_id } = useParams()
 
   const handleUpdateMovieNote = (e) => {
@@ -31,7 +34,6 @@ export const MoviePreview = () => {
     )
 
     if (confirmDelete) {
-      console.log(movie.movie_note_id)
       api
         .delete(ROUTES.MOVIE_NOTES, { data: { id: movie.movie_note_id } })
         .then(() => {
@@ -53,6 +55,7 @@ export const MoviePreview = () => {
       .get(`${ROUTES.MOVIE_NOTES_INFO}/${movie_note_id}`)
       .then((res) => {
         setMovie(res.data)
+        setIsUserMovie(res.data.user_id === userData.id ? true : false)
       })
       .catch((err) => {
         if (err.response) {
@@ -61,7 +64,7 @@ export const MoviePreview = () => {
           alert("Não foi possível carregar dados do filme!!")
         }
       })
-  }, [movie_note_id])
+  }, [movie_note_id, userData])
 
   return (
     <Container>
@@ -71,14 +74,16 @@ export const MoviePreview = () => {
         <GoBack />
         {movie && <MovieCard movie={movie} />}
 
-        <div>
-          <Button text={"Atualizar"} onClick={handleUpdateMovieNote} />
-          <Button
-            text={"Excluir"}
-            dark="true"
-            onClick={handleDeleteMovieNote}
-          />
-        </div>
+        {isUserMovie && (
+          <div>
+            <Button text={"Atualizar"} onClick={handleUpdateMovieNote} />
+            <Button
+              text={"Excluir"}
+              dark="true"
+              onClick={handleDeleteMovieNote}
+            />
+          </div>
+        )}
       </Main>
     </Container>
   )

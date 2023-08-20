@@ -8,6 +8,7 @@ exports.up = async function (knex) {
       mn.rating AS rating,
       u.id AS user_id,
       u.name AS user_name,
+      u.avatar AS user_avatar,
       mn.created_at AS created_at,
       mn.updated_at AS updated_at,
       GROUP_CONCAT(t.tag) AS tags

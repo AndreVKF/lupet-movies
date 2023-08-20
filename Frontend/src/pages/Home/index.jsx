@@ -15,27 +15,43 @@ export const Home = () => {
   const [movieList, setMovieList] = useState([])
   const [filteredMovieList, setFilteredMovieList] = useState([])
   const [searchTitle, setSearchTitle] = useState("")
+  const [displayAllMovies, setDisplayAllMovies] = useState(true)
 
   useEffect(() => {
+    const endpoint = displayAllMovies
+      ? ROUTES.MOVIE_NOTES_INFO_ALL
+      : ROUTES.MOVIE_NOTES_INFO_USER
+
     api
-      .get(ROUTES.MOVIE_NOTES_INFO_USER)
+      .get(endpoint)
       .then((res) => {
+        console.log(res)
         const movieNotes = res.data.map((movieNote) =>
           adjustTagsForMovieInfo(movieNote)
         )
 
-        setMovieList(movieNotes)
-        setFilteredMovieList(movieNotes)
+        const orderedMovieNotes = movieNotes.sort((f, s) => {
+          if (f.movie_title.toLowerCase() < s.movie_title.toLowerCase()) {
+            return -1
+          } else if (
+            f.movie_title.toLowerCase() > s.movie_title.toLowerCase()
+          ) {
+            return 1
+          }
+          return 0
+        })
+
+        setMovieList(orderedMovieNotes)
+        setFilteredMovieList(orderedMovieNotes)
       })
       .catch((err) => {
-        console.log(err)
         if (err.response) {
           alert(err.response.data.message)
         } else {
           alert("Não foi possível atualizar lista de filmes!!")
         }
       })
-  }, [])
+  }, [displayAllMovies])
 
   useEffect(() => {
     if (!searchTitle || searchTitle === "") {
@@ -61,7 +77,23 @@ export const Home = () => {
       />
 
       <NewMovie>
-        <h1>Lista de filmes</h1>
+        <div>
+          <h1>Lista de filmes</h1>
+          <div className="list-options">
+            <span
+              className={displayAllMovies ? "display-selected" : null}
+              onClick={() => setDisplayAllMovies(true)}
+            >
+              Todos os filmes
+            </span>
+            <span
+              className={displayAllMovies ? null : "display-selected"}
+              onClick={() => setDisplayAllMovies(false)}
+            >
+              Meus filmes
+            </span>
+          </div>
+        </div>
         <Link to="/create">
           <Button text={"+ Adicionar Filme"} />
         </Link>

@@ -15,11 +15,11 @@ export const FormSide = styled.div`
   flex-direction: column;
   align-items: start;
 
-  min-width: 34rem;
-  padding: 0 13.6rem 24rem;
+  min-width: 38rem;
+  padding: 0 13.6rem 8rem;
 
   > form {
-    width: 34rem;
+    width: 38rem;
     margin-top: 4.8rem;
 
     display: flex;

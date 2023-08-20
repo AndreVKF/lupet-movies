@@ -45,7 +45,6 @@ export const Perfil = () => {
           ...userData,
           ...{ name: res.data.name, email: res.data.email },
         }
-        console.log(newUserData)
 
         setUserData(newUserData)
         setOldPassword("")

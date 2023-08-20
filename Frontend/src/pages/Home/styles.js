@@ -18,6 +18,25 @@ export const NewMovie = styled.div`
   @media only screen and (max-width: 1400px) {
     padding: 5.8rem 12.4rem;
   }
+  > div {
+    display: flex;
+    flex-direction: column;
+
+    .list-options {
+      display: flex;
+      flex-direction: row;
+      gap: 1.2rem;
+    }
+
+    span {
+      cursor: pointer;
+    }
+
+    .display-selected {
+      color: ${({ theme }) => theme.COLORS.PINK};
+      font-weight: 700;
+    }
+  }
 
   > button {
     max-width: 20.8rem;

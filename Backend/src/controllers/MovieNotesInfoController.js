@@ -14,7 +14,7 @@ class MovieNotesInfoController {
     this.tbName = "v_movie_notes_info"
   }
 
-  indexUser = async (req, res) => {
+  index_user = async (req, res) => {
     const { user_id } = req.user
     const movieNotesInfo = await knex(this.tbName).where({ user_id })
 
@@ -22,15 +22,19 @@ class MovieNotesInfoController {
   }
 
   index = async (req, res) => {
-    const { user_id } = req.user
     const { movie_note_id } = req.params
 
     const [movieNoteInfo] = await knex(this.tbName).where({
-      user_id,
       movie_note_id,
     })
 
     return res.json(movieNoteInfo)
+  }
+
+  index_all = async (req, res) => {
+    const movieNotes = await knex(this.tbName)
+
+    return res.json(movieNotes)
   }
 }
 

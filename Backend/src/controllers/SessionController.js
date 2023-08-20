@@ -2,7 +2,7 @@ const knex = require("../database/knex/knex")
 const ErrorHandler = require("../utils/ErrorHandler")
 
 const { compare } = require("bcrypt")
-const { sign } = require("jsonwebtoken")
+const { sign, verify } = require("jsonwebtoken")
 const { jwtConfig } = require("../configs/auth")
 
 class SessionController {
@@ -35,6 +35,24 @@ class SessionController {
       token,
       expiresDt: expiresDt.toLocaleString("pt-BR"),
     })
+  }
+
+  validate = async (req, res) => {
+    const authHeader = req.headers.authorization
+
+    if (!authHeader) {
+      return res.status(400).json({ message: "Token não foi informado!!" })
+    }
+
+    // split token
+    const [, token] = authHeader.split(" ")
+
+    try {
+      const { userId } = verify(token, jwtConfig.secret)
+      return res.status(200).json({ message: "Token validado!!" })
+    } catch {
+      return res.status(401).json({ message: "Token inválido!!" })
+    }
   }
 }
 

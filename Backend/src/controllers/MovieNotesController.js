@@ -11,7 +11,7 @@ const ErrorHandler = require("../utils/ErrorHandler")
 
 class MovieNotesController {
   async index(req, res) {
-    const { user_id } = req.user
+    const { user_id } = req.params
 
     const movieNotes = await knex("movie_notes").where({ user_id })
 

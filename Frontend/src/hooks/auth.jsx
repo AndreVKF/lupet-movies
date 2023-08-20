@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react"
 
+import { ROUTES } from "../utils/constants"
 import { api } from "../services/api"
 
 const AuthContext = createContext({})
@@ -48,10 +49,25 @@ function AuthProvider({ children }) {
     const token = localStorage.getItem("@lupetmovies:token")
     const user = localStorage.getItem("@lupetmovies:user")
 
+    api.defaults.headers.common["Authorization"] = `Bearer ${token}`
     if (token && user) {
-      api.defaults.headers.common["Authorization"] = `Bearer ${token}`
+      // validate token
+      api
+        .get(ROUTES.VALIDATE_TOKEN)
+        .then(() => {
+          setUserData({ ...JSON.parse(user) })
+        })
+        .catch((err) => {
+          localStorage.removeItem("@lupetmovies:user")
+          localStorage.removeItem("@lupetmovies:token")
 
-      setUserData({ ...JSON.parse(user) })
+          setUserData(null)
+          if (err.response) {
+            if (err.response.status !== 401) {
+              alert("Erro de autenticação!!")
+            }
+          }
+        })
     }
   }, [])
 
