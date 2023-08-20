@@ -22,7 +22,7 @@ export const SignIn = () => {
   const navigate = useNavigate()
   const { signUp } = useAuth()
 
-  const handleSignIn = async (e) => {
+  const handleSignIn = (e) => {
     e.preventDefault()
 
     if (!name || !email || !password) {
@@ -30,24 +30,24 @@ export const SignIn = () => {
       return
     }
 
-    const requestCreateUser = await api.post(ROUTES.USERS, {
-      name,
-      email,
-      password,
-    })
-
-    if (requestCreateUser.status !== 200) {
-      if (requestCreateUser.response) {
-        alert(requestCreateUser.response.data.message)
-      } else {
-        alert("Não foi possível cadastrar o usuário!!")
-      }
-      return
-    }
-
-    await signUp({ email, password })
-    alert("Usuário cadastrado com sucesso!!")
-    navigate("/")
+    api
+      .post(ROUTES.USERS, {
+        name,
+        email,
+        password,
+      })
+      .then(() => {
+        signUp({ email, password })
+        alert("Usuário cadastrado com sucesso!!")
+        navigate("/")
+      })
+      .catch((err) => {
+        if (err.data) {
+          alert(err.data.response.message)
+        } else {
+          alert("Não foi possível cadastrar usuário")
+        }
+      })
   }
 
   return (
