@@ -25,7 +25,6 @@ export const Home = () => {
     api
       .get(endpoint)
       .then((res) => {
-        console.log(res)
         const movieNotes = res.data.map((movieNote) =>
           adjustTagsForMovieInfo(movieNote)
         )
